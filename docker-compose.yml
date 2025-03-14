@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - FLASK_ENV=production
+    depends_on:
+      - mongodb
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mongodb:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:
