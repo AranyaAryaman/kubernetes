@@ -5,7 +5,7 @@ metadata:
   labels:
     app: todo-flask-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: todo-flask-app
@@ -39,4 +39,5 @@ spec:
   ports:
   - port: 80
     targetPort: 5001
+    nodePort: 30080
   type: NodePort
